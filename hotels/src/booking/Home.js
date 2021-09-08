@@ -1,7 +1,8 @@
-
+import {useSelector} from 'react-redux';
 
 const Home = () => {
 
+    const state = useSelector(state => (state));
 
 
 
@@ -10,6 +11,7 @@ const Home = () => {
 
             Home Page
 
+                {JSON.stringify(state)}
 
         </div>
     )

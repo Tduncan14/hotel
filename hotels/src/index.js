@@ -4,42 +4,38 @@ import './index.css';
 import App from './App';
 import {createStore,combineReducers} from 'redux'
 import{Provider} from 'react-redux';
-import {composeWithDevtools} from 'redux-devtools-extension';
+import {composeWithDevTools} from 'redux-devtools-extension';
+import rootReducer from './reducers/index';
 
 
-
-const authReducer = (state = {},action) => {
-
-
-  switch(action.type){
-
-    case "LOGGED_IN_USER":
-      return {...state, ...action.payload}
-      break;
-    case "LOGOUT":
-       return action.payload
-       break;
-
-    default: return state
+// const authReducer = (state = {},action) => {
 
 
-  }
+//   switch(action.type){
+
+//     case "LOGGED_IN_USER":
+//       return {...state, ...action.payload}
+//       break;
+//     case "LOGOUT":
+//        return action.payload
+//        break;
+
+//     default: return state
+
+
+//   }
     
-}
+// }
 
 
 
 // combine the reducers
 
-const rootReducer = combineReducers({
-   user: authReducer
-
-})
 
 
 // create a redux store
 
-const store = createStore(rootReducer,composeWithDevtools());
+const store = createStore(rootReducer,composeWithDevTools());
 
 ReactDOM.render(
   <React.StrictMode>
