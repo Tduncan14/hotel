@@ -3,6 +3,9 @@ import Home from './booking/Home';
 import Login from './auth/Login';
 import Register  from './auth/Register';
 import TopNav from './components/TopNav';
+import {ToastContainer,toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 
@@ -21,8 +24,10 @@ import TopNav from './components/TopNav';
 
 function App() {
   return (
+
     <Router>
       {TopNav()}
+     < ToastContainer/>
       <Switch>
    <Route exact path="/" component={Home}/>
    <Route path="/login" component={Login}/>

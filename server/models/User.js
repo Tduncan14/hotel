@@ -6,7 +6,7 @@ const{Schema} = mongoose;
 
 
 
-const User = new Schema({
+const UserSchema = new Schema({
 
     name:{
         type:String,
@@ -33,10 +33,10 @@ const User = new Schema({
 
 
 
- const UserSchema = mongoose.model('User',User)
 
 
- useSchema.pre('save',function(next){
+ 
+ UserSchema.pre('save',function(next){
 
     let user = this
 
@@ -58,8 +58,14 @@ const User = new Schema({
         })
     }
 
+    else{
+        return next();
+    }
+
 
  })
 
+ const User = mongoose.model('User',UserSchema) 
 
- module.exports = UserSchema 
+
+ module.exports = User

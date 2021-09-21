@@ -1,4 +1,5 @@
-
+import {toast} from 'react-toastify';
+import {login} from '../actions/auth';
 
 
 const Login = () => {
@@ -7,12 +8,16 @@ const Login = () => {
 
 
     return(
-        <div className="container-fluid p-5 text-center">
+        <>
+        <div className="container-fluid bg-secondary p-5 text-center">
+
+
+
  
-            Login Page
-
-
+            
         </div>
+
+        </>
     )
 
 
