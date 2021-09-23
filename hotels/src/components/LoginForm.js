@@ -1,6 +1,6 @@
 
 
-const LoginForm = ({name,setName,email,setEmail,password,setPassword,handleSubmit}) => {
+const LoginForm = ({email,setEmail,password,setPassword,handleSubmit}) => {
 
 
 
@@ -32,7 +32,7 @@ const LoginForm = ({name,setName,email,setEmail,password,setPassword,handleSubmi
       
     
     
-       <button className="btn btn-primary">Login</button>
+       <button disabled={!email || !password ? true :false}className="btn btn-primary">Login</button>
     </form>
     
     )

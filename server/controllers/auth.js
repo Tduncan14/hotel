@@ -35,3 +35,56 @@ exports.register = async(req,res) => {
 
 
 }
+
+
+exports.login = async (req,res) => {
+
+
+    // console.log(req.body);
+
+    const{email,password} = req.body
+ 
+
+
+    try{
+        //check if user existed
+        
+        let user = await User.findOne({email}).exec();
+
+        console.log('User exist',user);
+
+
+        if(!user) res.status(400).send('user with that email not found');
+        //compare password
+
+        user.comparePassword(password,(err,match) => {
+
+            console.log('Compare password in log in error')
+
+            if(!match || err) return res.status(400).send('Wrong Password')
+
+
+            // generate token and send to client
+
+        })
+
+
+
+    }
+
+    catch(err){
+        
+        console.log("Login err",err)
+        res.status(400).send("Signin in failed");
+
+
+
+
+    }
+
+
+
+
+
+}
+
