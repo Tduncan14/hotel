@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const jwt = require('jsonwebtoken');
 
 
 exports.register = async(req,res) => {
@@ -64,7 +65,22 @@ exports.login = async (req,res) => {
             if(!match || err) return res.status(400).send('Wrong Password')
 
 
-            // generate token and send to client
+            // generate token and send to client and create a token
+
+           
+           let token = jwt.sign({_id:user._id},process.env.JWT_SECRET,{
+                expiresIn:'2d'
+            });
+            
+
+            res.json({token,user:{
+                _id:user._id,
+                name:user.name,
+                email:user.email,
+                createdAt:user.createdAt,
+                updatedAt:user.updatedAt
+
+            }})
 
         })
 
@@ -87,4 +103,7 @@ exports.login = async (req,res) => {
 
 
 }
+
+
+
 
