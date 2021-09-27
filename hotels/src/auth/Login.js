@@ -28,14 +28,14 @@ const Login = ({history}) => {
                 console.log('Save User Res in Redux and local storage and then redirect');
                 console.log(res.data);
 
-                window.localStorage.setItem('token',JSON.stringify(res.data));
+                window.localStorage.setItem('auth',JSON.stringify(res.data));
 
                 dispatch({
                     type:"LOGGED_IN_USER",
                     payload:res.data
                 });
 
-                // history.push('/');
+                history.push('/dashboard');
 
 
             }

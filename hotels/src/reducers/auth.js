@@ -8,7 +8,7 @@ if(window.localStorage.getItem('auth')){
 }
 
 else{
-    useState = null
+    userState = null
 }
 
 

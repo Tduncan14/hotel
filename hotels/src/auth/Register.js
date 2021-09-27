@@ -29,7 +29,7 @@ const Register = ({history}) => {
         
         console.log('register user',response)
         toast.success('Register success.please login')
-        history.push('/login')
+        history.push('/')
     }
 
     catch(err){
