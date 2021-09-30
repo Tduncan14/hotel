@@ -30,6 +30,20 @@ return (
     <div className="nav bg-light justify-content-between">
      <Link className="nav-link" to="/">Home</Link>
 
+
+     {
+         auth !== null && (
+            
+             <Link className="nav-link" to="/dashboard">
+                 Dashboard
+             </Link>
+
+
+            
+         )
+         
+     }
+
      {
          auth !== null && (
             <>

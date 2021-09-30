@@ -1,5 +1,6 @@
 import DashboardNav from "../components/Dashboardnav";
 import ConnectNav from "../components/ConnectNav";
+import {Link} from 'react-router-dom';
 
 
 const DashboardSeller = () => {
@@ -15,10 +16,21 @@ const DashboardSeller = () => {
             <DashboardNav/>
         </div>
 
+         
+         <div className="container-fluid">
+             <div className="row">
+                 <div className ="col-md-10">
+                     Your Hotels
+                 </div>
 
-        <div className="container">
-            <p> Show all hotels user had posted</p>
-        </div>
+                 <div className="col-md-2">
+                     <Link to="/hotels/new" className="btn btn-primary">
+                        + Add New
+                     </Link>
+                 </div>
+
+             </div>
+         </div>
 
         </>
     )
