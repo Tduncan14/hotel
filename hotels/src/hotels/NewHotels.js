@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 
 
-const Hotel = () => {
+const NewHotel = () => {
 
     const {auth} = useSelector((state) => ({...state}))
 
@@ -16,4 +16,4 @@ const Hotel = () => {
 }
 
 
-export default Hotel
+export default NewHotel
