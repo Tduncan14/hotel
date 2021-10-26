@@ -3,6 +3,8 @@ import ConnectNav from "../components/ConnectNav";
 import {Link} from 'react-router-dom';
 import { useSelector } from "react-redux";
 import {HomeOutlined} from '@ant-design/icons'
+import { createConnectAccount } from "../actions/stripe";
+import {toast} from 'react-toastify';
 
 
 const DashboardSeller = () => {
@@ -10,7 +12,27 @@ const DashboardSeller = () => {
     // connected to strip
 
     const {auth} = useSelector((state) => ({...state}));
+    const [loading,setLoading] = useState(false);
 
+    const handleClick = async () => {
+
+        setLoading(true)
+
+        try{
+            let res = await createConnectAccount(auth.token)
+            console.log(res) // get login link
+
+
+
+        }
+        catch(err){
+            console.log(err);
+            toast.error('Stripe connected failed,Try again')
+            setLoading(false);
+        }
+
+
+    }
 
     const connected = () => (
 
@@ -42,7 +64,7 @@ const DashboardSeller = () => {
                 <HomeOutlined className="h1" />
                  <h4> Setup payouts to post room</h4>
                  <p className="lead">partnered with stripe to transfer earnings to your bank  account</p>
-                 <button className="btn btn-primary mb-3">
+                 <button onClick={handleClick} className="btn btn-primary mb-3">
                      Setup payouts
                  </button>
                  <p className="text-muted"><small>You will be redirected to Stripe to complete the onboarding process</small></p>
