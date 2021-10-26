@@ -1,3 +1,4 @@
+import { useState } from "react";
 import DashboardNav from "../components/Dashboardnav";
 import ConnectNav from "../components/ConnectNav";
 import {Link} from 'react-router-dom';
@@ -13,6 +14,7 @@ const DashboardSeller = () => {
 
     const {auth} = useSelector((state) => ({...state}));
     const [loading,setLoading] = useState(false);
+
 
     const handleClick = async () => {
 
@@ -33,7 +35,6 @@ const DashboardSeller = () => {
 
 
     }
-
     const connected = () => (
 
 
@@ -64,8 +65,8 @@ const DashboardSeller = () => {
                 <HomeOutlined className="h1" />
                  <h4> Setup payouts to post room</h4>
                  <p className="lead">partnered with stripe to transfer earnings to your bank  account</p>
-                 <button onClick={handleClick} className="btn btn-primary mb-3">
-                     Setup payouts
+                 <button disabled={loading}onClick={handleClick} className="btn btn-primary mb-3">
+                     {loading ? 'Processing...' : 'Setup payouts'}
                  </button>
                  <p className="text-muted"><small>You will be redirected to Stripe to complete the onboarding process</small></p>
                 </div>
