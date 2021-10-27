@@ -5,6 +5,7 @@ const cors = require('cors');
 const fs = require('fs');
 require('dotenv').config();
 const morgan = require('morgan');
+const Striperouter = require('./routes/stripe');
 
 
 const App  = express()
@@ -34,6 +35,7 @@ App.use(express.json())
 App.use(cors());
 App.use(morgan('dev'));
 App.use('/api',Authrouter)
+App.use('/api',Striperouter)
 // App.get("/api/:message",(req,res) => {
         
 //     res.status(200).send(`here is your message ${req.params.message}`)
