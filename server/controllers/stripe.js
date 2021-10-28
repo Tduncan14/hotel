@@ -1,5 +1,6 @@
 const User = require('../models/User')
 const Stripe = require('stripe');
+const queryString = require('query-string');
 
  const stripe = Stripe(process.env.STRIPE_SECRET)
 
@@ -16,6 +17,11 @@ const createConnectAccount = async (req,res) => {
 
 
 
+
+
+  if(!user.stripe_account_id){
+
+    
     const account = await stripe.accounts.create({
         type:'express',
     })
@@ -23,9 +29,25 @@ const createConnectAccount = async (req,res) => {
 
     console.log('Account ==>' ,account);
 
+    user.stripe_account_id = account.id;
+    
+    user.save();
 
 
+  }
 
+  // create account login link for accountid for frontend to complete onboard
+
+  let accountLink = await stripe.accountLinks.create({
+
+    account: user.stripe.account_id,
+    refresh_url:process.env.STRIPE_REDIRECT_URL,
+    return_url:process.env.STRIPE_REDIRECT_URL,
+    type:'account_onboarding'
+  })
+
+
+  // prefill any info such as email
 
 
     
