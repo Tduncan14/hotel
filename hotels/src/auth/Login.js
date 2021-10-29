@@ -47,7 +47,7 @@ const Login = ({history}) => {
             console.log(err)
 
       
-            if(err.response.status === 400) toast.error(err.response.data)
+            if(err.response.status === 400) toast.error('Password and Email does not match')
 
         }
 

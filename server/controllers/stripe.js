@@ -40,18 +40,30 @@ const createConnectAccount = async (req,res) => {
 
   let accountLink = await stripe.accountLinks.create({
 
-    account: user.stripe.account_id,
-    refresh_url:process.env.STRIPE_REDIRECT_URL,
-    return_url:process.env.STRIPE_REDIRECT_URL,
-    type:'account_onboarding'
+    account: user.stripe_account_id,
+    refresh_url: process.env.STRIPE_REDIRECT_URL,
+    return_url: process.env.STRIPE_REDIRECT_URL ,
+    type: 'account_onboarding',
   })
 
 
   // prefill any info such as email
 
+  accountLink = Object.assign(accountLink,{
+      "stripe_user[email]":user.email || undefined,
 
-    
+  })
 
+  console.log('account link', accountLink)
+
+    //sending the link into the front end'
+
+    let link = `${accountLink.url}?${queryString.stringify(accountLink)}`
+
+
+    console.log( "====>",link)
+
+    res.send(link)
 
 }
 
