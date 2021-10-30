@@ -1,10 +1,40 @@
 import { useEffect } from 'react';
 import {LoadingOutlined} from '@ant-design/icons';
+import {useSelector,useDispatch} from 'react-redux';
+import { getAccountStatus } from '../actions/stripe';
+
 
 
 
 
 const StripeCallback = ({history}) => {
+
+    const {auth} = useSelector((state) =>({...state}))
+
+    const dispatch = useDispatch();
+
+
+    useEffect(() =>{
+
+        if(auth && auth.token) accountStatus()
+
+    },[auth])
+
+
+     const accountStatus = async () => {
+
+        try{
+            const res = await getAccountStatus(auth.token);
+
+            console.log('USER ACCOUNT STATUS ON STRIPE CALLBACK RESPONSE')
+            
+        }
+
+        catch(err){
+            console.log(err)
+        }
+     }
+
 
 
     return <div className="  d-flex justify-content-center p-5">

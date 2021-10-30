@@ -5,7 +5,7 @@ const queryString = require('query-string');
  const stripe = Stripe(process.env.STRIPE_SECRET)
 
 
-const createConnectAccount = async (req,res) => {
+exports.createConnectAccount = async (req,res) => {
   // find user from db
 
   // create account link based on accound id for for frontend
@@ -67,4 +67,32 @@ const createConnectAccount = async (req,res) => {
 
 }
 
-module.exports = createConnectAccount;
+
+exports.getAccountStatus = async (req,res) =>{
+
+  // console.log('GET ACCOUNT STATUS')
+
+
+  const user = await User.findById(req.user._id).exec();
+
+  const account = await stripe.accounts.retrieve(user.stripe_account_id);
+
+  // console.log('user accoutn retireve',account)
+
+  const updatedUser = await User.findByIdAndUpdate(user._id,{
+    stripe_seller: account
+  }, {new:true}).select('-password').exec();
+
+
+
+  // console.log("this is the user,",updatedUser)
+
+
+  res.json(updatedUser)
+
+
+
+
+}
+
+
