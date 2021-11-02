@@ -67,6 +67,31 @@ exports.createConnectAccount = async (req,res) => {
 
 }
 
+// pending payment stripe delay days
+
+
+exports.updateDelayDays = async(accountId) => {
+
+
+     const account = await stripe.accounts.update(accountId,{
+       settings:{
+         payouts:{
+           schedule:{
+             delay_days:7,
+           }
+         }
+       }
+     });
+
+
+     return account
+
+
+
+
+
+}
+
 
 exports.getAccountStatus = async (req,res) =>{
 
@@ -78,9 +103,13 @@ exports.getAccountStatus = async (req,res) =>{
   const account = await stripe.accounts.retrieve(user.stripe_account_id);
 
   // console.log('user accoutn retireve',account)
+  // update delayed days
+
+
+  const updatedAccount = await this.updateDelayDays(account.id)
 
   const updatedUser = await User.findByIdAndUpdate(user._id,{
-    stripe_seller: account
+    stripe_seller: updatedAccount
   }, {new:true}).select('-password').exec();
 
 
@@ -88,7 +117,7 @@ exports.getAccountStatus = async (req,res) =>{
   // console.log("this is the user,",updatedUser)
 
 
-  res.json(updatedUser)
+   res.json(updatedUser)
 
 
 
