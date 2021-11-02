@@ -1,6 +1,7 @@
     import { useSelector } from "react-redux";
     import {Card,Avatar} from 'antd';
     import moment from 'moment';
+    import { getAccountBalance } from "../../../server/controllers/stripe";
     // asking the user to connect with the stripe
 
 
