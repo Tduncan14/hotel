@@ -136,7 +136,6 @@ exports.getAccountBalance = async(req,res) => {
     })
 
     console.log('======>', balance)
-
     res.json(balance)
 
   }
@@ -152,3 +151,31 @@ exports.getAccountBalance = async(req,res) => {
 
 }
 
+
+exports.payoutSettings = async ( req, res) => {
+
+  try {
+     const user = await User.findById(req.user._id).exec();
+
+
+     const loginLink = await stripe.accounts.createLoginLink(
+       user.stripe_seller.id,
+       {redirect_url:process.env.STRIPE_SETTING_REDIRECT_URL
+       }
+     )
+
+     console.log('Logout link payout settings', loginLink)
+
+     res.json(loginLink)
+  }
+
+  catch(err){
+
+     console.log('STRIPE PAYOUT ERROR',err)
+  }
+
+
+
+
+
+}

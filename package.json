@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "algolia-places-react": "^1.6.1",
     "axios": "^0.24.0",
     "stripe": "^8.178.0"
   }
