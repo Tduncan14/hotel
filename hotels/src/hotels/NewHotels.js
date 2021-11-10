@@ -2,7 +2,12 @@ import { useSelector } from "react-redux";
 import {useState} from 'react';
 import {toast} from 'react-toastify';
 import AlgoliaPlaces from 'algolia-places-react';
-import{DatePicker} from 'antd'
+import{DatePicker,Select} from 'antd'
+import{moment} from "moment"
+
+
+const {Option} = Select
+
 
 
 
@@ -21,29 +26,35 @@ const NewHotel = () => {
     const [values, setValues] = useState({
         title: "",
         content: "",
-        location: "",
         image: "",
         price: "",
         from: "",
         to: "",
         bed: "",
+        location:""
       });
 
 
       const [preview,setPreview] = useState('https://via.placeholder.com/100x100.png?text=PREVIEW');
 
 
+    //   const [location,setLocation] = useState('')
 
-    const {title,content,location,image,price,from,to,bed} = values;
+
+
+    const {title,content,image,price,from,to,bed,location} = values;
     
 
 
 
 
     const handleSubmit = (e) => {
+        e.preventDefault()
+
+        console.log(values)
 
         
-        <div ></div>
+        
     }
 
     const handleImageChange = (e) => {
@@ -63,8 +74,24 @@ const NewHotel = () => {
 
         setValues({...values, [e.target.name]:e.target.value})
 
+      console.log( "data", <datePicker disabledDate={(current) => console.log('date2',current && current.valueOf() < moment().subtract(1, "days"))} /> )
+
 
     }
+
+    // const locations = (e) => {
+
+    //     console.log(e.target.value,"value")
+    //        e.preventDefault();
+    //        setLocation(e.target.value)
+    // }
+ 
+
+    // const disabled = (current) => {
+        
+    //     (current) => current && current.valueOf() < moment().subtract(1, 'days')
+    // }
+
 
     const hotelForm = () => (
 
@@ -93,11 +120,11 @@ const NewHotel = () => {
                     value={content}/>
 
 
-                 <AlgoliaPlaces className="form-control m-2 " 
+                 <input type="text" className="form-control m-2 " 
                  placeholder="Location" 
-                 defaultValue={location}
-                  options={config}
-                  onChange={({suggestion}) => (setValues({...values, location:suggestion.value}))}
+                 value={location}
+                 name="location"
+                 onChange={handleChange}
 
                   style={{height:"50px"}}
                   />
@@ -114,25 +141,44 @@ const NewHotel = () => {
 
 
 
-                 <input
+                 {/* <input
                    type="number"
                    name="bed"
                    onChange={handleChange}
                    placeholder="Number of Beds"
                    className="form-control m-2"
                    value={bed}
-                   />
- 
+                   /> */}
 
-                  <DatePicker placeholder="From date" 
-                  className="form-control m-2"
-                   onChange={(date, dateString) => setValues({...values, from:dateString})
-                  }/>
+
+                   <Select onChange={(value) => setValues({...values, bed:value})} className="w-100 m-2" size="large" placeholder="number of beds">
+                       <Option key={1}>1</Option>
+                       <Option key={2}>2</Option>
+                       <Option key={3}>3</Option>
+                       <Option key={4}>4</Option>
+
+                </Select>
+ 
+ <DatePicker
+        placeholder="From date"
+        className="form-control m-2"
+        onChange={(date, dateString) =>
+          setValues({ ...values, from: dateString })
+        }
+        // disabledDate={(current) =>
+        //   current && current.valueOf() < moment().subtract(1, "days")'}
+    // 
+       
+      />
+
 
                  <DatePicker placeholder="To date"
                   className="form-control m-2"
-                 onChange={(date, dateString) => setValues({...values, to:dateString})
-                  }/>
+                 onChange={(date, dateString) => setValues({...values, to:dateString})}
+                //  disabledDate = {(current) =>
+                //     current && current.valueOf() < moment().subtract(1, "days")
+                //}/
+                />
 
 
                 
@@ -158,6 +204,7 @@ const NewHotel = () => {
             <img src={preview} alt="preview_image" className="img img-fluid m-2"/>
             
             Image <pre>{JSON.stringify(values,null,4)}</pre></div>
+                   
 
         </div>
 
