@@ -4,6 +4,8 @@ import {toast} from 'react-toastify';
 import AlgoliaPlaces from 'algolia-places-react';
 import{DatePicker,Select} from 'antd'
 import{moment} from "moment"
+import {createHotel} from '../actions/hotel';
+import {useSelector} from 'react-redux';
 
 
 const {Option} = Select
@@ -35,6 +37,10 @@ const NewHotel = () => {
       });
 
 
+      const {auth} = useSelector((state) => ({...state}));
+      const {token} =  auth;
+
+
       const [preview,setPreview] = useState('https://via.placeholder.com/100x100.png?text=PREVIEW');
 
 
@@ -48,10 +54,26 @@ const NewHotel = () => {
 
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit =  async (e) => {
         e.preventDefault()
 
-        console.log(values)
+        
+
+
+        let res =  await createHotel(token,hotelData)
+
+        console.log('Hotel create',res)
+
+
+        toast('New hotel is posted')
+
+
+
+        setTimeout(() => {
+
+            window.location.reload()
+
+        },1000)
 
         
         
