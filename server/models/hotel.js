@@ -28,8 +28,8 @@ const hotelSchema = new Schema ({
         type:ObjectId,
         ref:'User'
     },
-    Image:{
-        type:Buffer,
+    image:{
+        data:Buffer,
         contentType: String
     },
 
@@ -55,7 +55,7 @@ const hotelSchema = new Schema ({
 
 
 
- const  hotel = mongoose.model('Hotel',hotelSchema)
+ const  Hotel = mongoose.model('Hotel',hotelSchema)
 
 
- module.exports = hotel
+ module.exports = Hotel
