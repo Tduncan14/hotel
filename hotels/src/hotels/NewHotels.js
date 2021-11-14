@@ -5,6 +5,7 @@ import AlgoliaPlaces from 'algolia-places-react';
 import{DatePicker,Select} from 'antd'
 import{moment} from "moment"
 import {createHotel} from '../actions/hotel';
+import HotelCreateForm from  '../components/forms/HotelCreateForm'
 
 
 const {Option} = Select
@@ -71,6 +72,7 @@ const NewHotel = () => {
 
         // console.log([...hotelData])
 
+        try{
 
         let res =  await createHotel(token,hotelData)
 
@@ -86,7 +88,12 @@ const NewHotel = () => {
             window.location.reload()
 
         },1000)
+    }
 
+    catch(err){
+        console.log(err)
+        toast.error(err.response.data)
+    }
         
         
     }
@@ -127,100 +134,7 @@ const NewHotel = () => {
     // }
 
 
-    const hotelForm = () => (
-
-        <form onSubmit={handleSubmit} className="m-2">
-            <div className="form-group">
-                 <label className="btn btn-outline-secondary btn-block m-2 text-left">
-                     Image
-                      <input type="file" name="image" onChange={handleImageChange} accept="image/*" hidden
-                      />
-
-                 </label>
-
-                 <input type="text"
-                  name="title"
-                   onChange={handleChange} 
-                   placeholder="Title" 
-                   className="form-control m-2"
-                    value={title}/>
-                 
-
-                 <textarea  name="content" 
-                 onChange={handleChange}
-                  placeholder="content"
-                  name="content"
-                   className="form-control m-2"
-                    value={content}/>
-
-
-                 <input type="text" className="form-control m-2 " 
-                 placeholder="Location" 
-                 value={location}
-                 name="location"
-                 onChange={handleChange}
-
-                  style={{height:"50px"}}
-                  />
-
-
-
-                 <input type="number"
-                  onChange={handleChange} 
-                  name="price"
-                  placeholder="Price" 
-                  className="form-control m-2"
-                   value={price}/>
-
-
-
-
-                 {/* <input
-                   type="number"
-                   name="bed"
-                   onChange={handleChange}
-                   placeholder="Number of Beds"
-                   className="form-control m-2"
-                   value={bed}
-                   /> */}
-
-
-                   <Select onChange={(value) => setValues({...values, bed:value})} className="w-100 m-2" size="large" placeholder="number of beds">
-                       <Option key={1}>1</Option>
-                       <Option key={2}>2</Option>
-                       <Option key={3}>3</Option>
-                       <Option key={4}>4</Option>
-
-                </Select>
- 
- <DatePicker
-        placeholder="From date"
-        className="form-control m-2"
-        onChange={(date, dateString) =>
-          setValues({ ...values, from: dateString })
-        }
-        // disabledDate={(current) =>
-        //   current && current.valueOf() < moment().subtract(1, "days")'}
-    // 
-       
-      />
-
-
-                 <DatePicker placeholder="To date"
-                  className="form-control m-2"
-                 onChange={(date, dateString) => setValues({...values, to:dateString})}
-                //  disabledDate = {(current) =>
-                //     current && current.valueOf() < moment().subtract(1, "days")
-                //}/
-                />
-
-
-                
-            </div>
-                <button className="btn btn-outline-primary m-2">Save</button>
-        </form>
-    )
-
+    
 
 
     return(
@@ -232,7 +146,15 @@ const NewHotel = () => {
         <div className="row">
         <div className=" col-md-10">
                 <br />
-                {hotelForm()}
+               <HotelCreateForm
+                 values={values}
+                 setValues={setValues}
+                 handleChange={handleChange}
+                 handleImageChange={handleImageChange}
+                 handleSubmit={handleSubmit}
+
+               
+               />
         </div>
         <div className="col-md-2">
             <img src={preview} alt="preview_image" className="img img-fluid m-2"/>

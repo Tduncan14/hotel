@@ -7,3 +7,6 @@ export const  createHotel = async (token,data) => axios.post(`${process.env.REAC
         Authorization: `Bearer ${token}`
     }
 })
+
+
+export const Allhotels = async () => await axios.get( `${process.env.REACT_APP_API}/hotels`)

@@ -30,3 +30,16 @@ exports.create = async (req, res) => {
     }
   };
   
+
+  exports.hotels = async ( req,res) => {
+
+    let all = await Hotel.find({})
+    .limit(24)
+    .select('-image.data')
+    .populate('postedBy','_id name')
+    .exec();
+
+     
+    res.json(all)
+
+  }
