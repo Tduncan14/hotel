@@ -20,10 +20,38 @@ const SmallCard = ({hotel, handleHotelDelete = (h) => h}) => {
     <div className="card mb-3">
 
         <div className="row no-gutters">
-             <div className="col-md-4">
-                   <img src="http://via.placeholder.com/900x500.png?text=MERN+Booking" alt="default"
-                    className="card-image img img-fluid"/>
-             </div>
+
+
+        <img
+                   src={`${process.env.REACT_APP_API}/image/:hotelId`} 
+                   alt="default hotel image"
+                   className="card-image img img-fluid"
+                   />
+{/* 
+            {
+
+               hotel.image && hotel.image.contentType  ? 
+               (
+                   <img
+                   src={`${process.env.REACT_APP_API}`} 
+                   alt="default hotel image"
+                   className="card-image img img-fluid"
+                   />
+
+
+
+          
+               ) 
+               
+               :(
+
+              <div className="col-md-4">
+              <img src="http://via.placeholder.com/900x500.png?text=MERN+Booking" alt="default"
+                className="card-image img img-fluid"/>
+              </div>
+               )
+            } */}
+       
 
              <div className="col-md-8">
               <div className="card-body">
