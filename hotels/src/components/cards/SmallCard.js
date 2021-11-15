@@ -50,9 +50,23 @@ const SmallCard = ({hotel, handleHotelDelete = (h) => h}) => {
                    </p>
 
 
+
+                   <div className="d-flex justify-content-between h4">
+
+                
                    <button onClick= {() => history.push(`/hotel/${hotel._id}`)} className="btn btn-primary"> Show more</button>
 
 
+                  <Link to={`/hotel/edit/${hotel._id}`}>
+                 <EditOutlined className="text-warning"/>
+                </Link>
+
+               <DeleteOutlined  onClick={() => handleHotelDelete(hotel._id)} 
+              className='text-danger' />
+
+          
+
+            </div>
 
                   
                    
@@ -64,17 +78,7 @@ const SmallCard = ({hotel, handleHotelDelete = (h) => h}) => {
         </div>
 
  
-        <div className="d-flex justify-content-between h4">
-              <Link to={`/hotel/edit/${hotel._id}`}>
-            <EditOutlined className="text-warning"/>
-           </Link>
 
-            <DeleteOutlined  onClick={() => handleHotelDelete(hotel._id)} 
-              className='text-danger' />
-
-          
-
-            </div>
        
 
          

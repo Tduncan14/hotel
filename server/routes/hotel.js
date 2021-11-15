@@ -5,12 +5,13 @@ const  requireSignin  = require("../middlewares");
 const router  = express.Router()
 
 
-const {create,hotels} = require('../controllers/hotel');
+const {create,hotels,hotel,image} = require('../controllers/hotel');
 
 
 
 router.post('/create-hotel',requireSignin,formidable(),create);
 router.get('/hotels', hotels)
+router.get('/image/:hotelId',image);
 
 
 module.exports  = router;

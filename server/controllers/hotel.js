@@ -43,3 +43,24 @@ exports.create = async (req, res) => {
     res.json(all)
 
   }
+
+
+  exports.image = async ( req,res) => {
+
+    let hotel = await Hotel.findById(req.params.hotelId).exec();
+
+
+      console.log('helloo')
+    if(hotel && hotel.image && hotel.image.data !==null){
+
+      res.set('Content-Type', hotel.image.contentType)
+      return res.send(hotel.image.data)
+    }
+
+
+
+
+
+
+
+  }
