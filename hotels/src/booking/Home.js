@@ -26,6 +26,7 @@ const Home = () => {
 
     }
 
+   const handleHotelDelete = () => {}
 
 
     return(<>
@@ -46,7 +47,7 @@ const Home = () => {
             </pre> */}
             i
             {hotels.map((hotel) => (
-                <SmallCard key={hotel._id} hotel={hotel}/>
+                <SmallCard key={hotel._id} hotel={hotel} handleHotelDelete={handleHotelDelete}/>
             ))}
         </div>
 
