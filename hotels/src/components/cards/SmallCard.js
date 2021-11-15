@@ -1,4 +1,5 @@
 import { currencyFormatter } from "../../actions/auth";
+import {diffDays} from '../../actions/hotel';
 
 const SmallCard = ({hotel}) => {
 
@@ -17,13 +18,21 @@ const SmallCard = ({hotel}) => {
 
              <div className="col-md-8">
               <div className="card-body">
-                   <h3 className="card-title">{hotel.title}</h3>
+                   <h3 className="card-title">{hotel.title}
                    <span className="float-right text-primary">
                        {currencyFormatter({
                            amount: hotel.price,
                            currency:"usd"
                        })}
                    </span>
+                   </h3>
+                   <p className="alert alert-info">{hotel.location}</p>
+                   <p className="card-text">{`${hotel.content.substring(1,200)}...`}</p>
+                   <p className="card-text">
+                       <span className="float-right text-primary">
+                            for {diffDays(hotel.from, hotel.to)}  {diffDays(hotel.from, hotel.to) <= 1 ? ' day' : 'days'}
+                       </span>
+                   </p>
               </div>
          </div>
         </div>
